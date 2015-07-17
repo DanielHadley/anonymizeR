@@ -5,6 +5,8 @@ Version: 0.1
 Date: 2015-07-17
 Author: Daniel P. Hadley
 Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Description: Takes an identifying variable from a data frame (e.g., social security#) and replaces each unique observation with an anonymous ID.    
+License: MIT + file LICENSE
 LazyData: TRUE
+Imports:
+    dplyr

@@ -20,7 +20,7 @@ library(dplyr)
 # 3. Create 'key' option
 # 4. Maybe seperate functions for numbers only, or letters only
 
-anonymize <- function(mydf, identifier, IDLength = 10, dropOld = TRUE) {
+anonymize_randomly <- function(mydf, identifier, IDLength = 10, dropOld = TRUE) {
   # First group them using dplyr functions to find only the unique observations
   byIdentifier <- mydf %>% group_by_(identifier) %>% summarise
   # Now create an random ID for each unique observation 
