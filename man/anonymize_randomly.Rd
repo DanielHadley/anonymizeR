@@ -4,7 +4,8 @@
 \alias{anonymize_randomly}
 \title{Generate a random string for each unique value in a variable from a data frame}
 \usage{
-anonymize_randomly(mydf, identifier, id_length = 10, drop_old = TRUE)
+anonymize_randomly(mydf, identifier, id_length = 10, drop_old = TRUE,
+  write_key = FALSE)
 }
 \arguments{
 \item{mydf}{A data frame or data table}
@@ -14,6 +15,8 @@ anonymize_randomly(mydf, identifier, id_length = 10, drop_old = TRUE)
 \item{id_length}{The length of the newly generated random id. Defaults to 10.}
 
 \item{drop_old}{Do you want to drop the identifier from the data that gets returned? Defaults to TRUE.}
+
+\item{write_key}{Writes a csv file in the working directory with each unique identifier and its corresponding ID. Defaults to FALSE.}
 }
 \value{
 A data frame identical to the original but with a new variable containing the random ID, which will be named <identifier>.anon.ID, and missing the identifier if drop_old is set to TRUE.
