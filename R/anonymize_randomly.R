@@ -10,7 +10,8 @@
 
 anonymize_randomly <- function(mydf, identifier, id_length = 10, drop_old = TRUE) {
   # First group them using dplyr functions to find only the unique observations
-  byIdentifier <- mydf %>% group_by_(identifier) %>% summarise
+  # byIdentifier <- mydf %>% group_by_(identifier) %>% summarise
+  byIdentifier <- dplyr::summarise(dplyr::group_by_(mydf, identifier))
   # Now create an random ID for each unique observation
   for(i in 1:nrow(byIdentifier)){
     byIdentifier$temp[i] <- paste(sample(c(0:9, letters, LETTERS), id_length, replace=TRUE), collapse="")
@@ -19,7 +20,7 @@ anonymize_randomly <- function(mydf, identifier, id_length = 10, drop_old = TRUE
   if(length(unique(byIdentifier$temp)) < length(byIdentifier$temp)) warning('Two or more randomly assigned IDs were the same. Please set.seed() to a different number, and/or increase the length of the ID generated.')
   colnames(byIdentifier)[2] <- paste0(identifier, ".anon.ID")
   # Join in back to the original dataset
-  DeidentifiedData <- left_join(mydf, byIdentifier)
+  DeidentifiedData <- dplyr::left_join(mydf, byIdentifier)
   # Drop the identifier from original dataset if TRUE, or return joined data if FALSE
   if (drop_old) {
     DeidentifiedData[which(colnames(DeidentifiedData)==identifier)] <- NULL
